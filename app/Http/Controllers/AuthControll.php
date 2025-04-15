@@ -21,11 +21,13 @@ class AuthControll extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('blog');
+            return redirect()->intended('halaman');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()
+        ->withInput($request->only('email'))
+        ->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }
