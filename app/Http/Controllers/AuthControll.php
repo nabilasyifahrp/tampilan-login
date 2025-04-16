@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthControll extends Controller
 {
-    function login() {
+    public function index()
+    {
+        return view('login'); 
+    }
+
+    public function login()
+    {
         return view('login');
     }
 
-    function authenticating(Request $request)
+    public function authenticating(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -20,14 +26,13 @@ class AuthControll extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('halaman');
+            return redirect()->intended('/halaman'); 
         }
 
         return back()
-        ->withInput($request->only('email'))
-        ->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-        ]);
+            ->withInput($request->only('email'))
+            ->withErrors([
+                'email' => 'Email atau password salah.',
+            ]);
     }
 }
