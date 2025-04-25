@@ -69,7 +69,6 @@
 </head>
 <body>
 
-  <!-- Icon panah kembali -->
   <a href="{{ route('dashboard') }}" class="back-icon" title="Kembali ke Dashboard">
     <i class="fas fa-arrow-left"></i>
   </a>
